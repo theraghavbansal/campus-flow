@@ -1,0 +1,13 @@
+{
+  "name": "campusflow-ai",
+  "version": "1.0.0",
+  "description": "CampusFlow AI - human-in-the-loop college leave workflow prototype",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
