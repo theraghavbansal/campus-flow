@@ -88,4 +88,4 @@ For a real deployment, replace the heuristic extraction function with an LLM pro
 
 This is a hackathon prototype. The email action is intentionally simulated; it does not send real emails without connecting an external provider.
 
-Team: **Coding Brats**
+Team: **HackForge**
