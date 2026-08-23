@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusFlow AI — Human Control Center</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">CF</div><div><b>CampusFlow</b><span>AI Operations</span></div></div>
+    <nav>
+      <button class="nav active" data-view="dashboard">⌂ <span>Overview</span></button>
+      <button class="nav" data-view="requests">▣ <span>Requests</span><em id="pendingBadge">0</em></button>
+      <button class="nav" data-view="approvals">✓ <span>Approval Queue</span></button>
+      <button class="nav" data-view="runs">◷ <span>Run Log</span></button>
+      <button class="nav" data-view="system">⚙ <span>System</span></button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="live-dot"></div><span>Automation engine online</span>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div><div class="eyebrow">NOTION TRACK • PROTOTYPE</div><h1 id="pageTitle">Operations Overview</h1></div>
+      <div class="header-actions"><button class="ghost" id="resetBtn">Reset Demo</button><button class="primary" id="newRequestBtn">+ New Request</button></div>
+    </header>
+
+    <section id="dashboard" class="view active">
+      <div class="hero">
+        <div><span class="pill green">● SYSTEM ONLINE</span><h2>AI handles the messy input.<br><strong>Humans handle judgment.</strong></h2><p>One real college workflow automated end-to-end, with every consequential decision visible and recoverable.</p></div>
+        <div class="flow"><div>Message</div><i>→</i><div>AI</div><i>→</i><div>Approval</div><i>→</i><div>Action</div><i>→</i><div>Run Log</div></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span>Total requests</span><strong id="total">0</strong><small>All incoming work</small></div>
+        <div class="stat"><span>Needs approval</span><strong id="pending">0</strong><small>Human decision required</small></div>
+        <div class="stat"><span>Manual review</span><strong id="manual">0</strong><small>Low-confidence input</small></div>
+        <div class="stat"><span>Completed runs</span><strong id="completed">0</strong><small>Actions with proof</small></div>
+      </div>
+      <div class="grid2">
+        <div class="panel"><div class="panel-head"><div><h3>Recent requests</h3><p>Live workflow state</p></div><button class="text-btn" data-go="requests">View all →</button></div><div id="recentRequests"></div></div>
+        <div class="panel"><div class="panel-head"><div><h3>Automation chain</h3><p>What happens behind the scenes</p></div></div><div class="chain">
+          <div><b>01</b><span><strong>Understand</strong><small>Extract date, reason & type</small></span></div>
+          <div><b>02</b><span><strong>Route</strong><small>Confidence & priority check</small></span></div>
+          <div><b>03</b><span><strong>Human decision</strong><small>Approve, reject or override</small></span></div>
+          <div><b>04</b><span><strong>Execute</strong><small>Real action + timestamped proof</small></span></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="requests" class="view">
+      <div class="section-head"><div><h2>Requests Database</h2><p>Every incoming request in a human-readable format.</p></div><input id="search" placeholder="Search requests..."></div>
+      <div class="table-wrap"><table><thead><tr><th>Request</th><th>AI extraction</th><th>Priority</th><th>Status</th><th>Owner</th><th>Action</th></tr></thead><tbody id="requestsTable"></tbody></table></div>
+    </section>
+
+    <section id="approvals" class="view">
+      <div class="section-head"><div><h2>Approval Queue</h2><p>Consequential decisions pause here. Nothing moves without a human.</p></div></div>
+      <div id="approvalList" class="approval-list"></div>
+    </section>
+
+    <section id="runs" class="view">
+      <div class="section-head"><div><h2>Run Log</h2><p>Every execution is timestamped and attributed to the integration.</p></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Time</th><th>Request</th><th>Status</th><th>Action</th><th>Decision</th><th>Written by</th></tr></thead><tbody id="runsTable"></tbody></table></div>
+    </section>
+
+    <section id="system" class="view">
+      <div class="system-grid">
+        <div class="panel"><h3>System architecture</h3><div class="architecture"><span>Webhook / Form</span><i>→</i><span>Node + Express</span><i>→</i><span>AI Engine</span><i>→</i><span>Human Control</span><i>→</i><span>External Action</span></div></div>
+        <div class="panel"><h3>Reliability rules</h3><ul class="rules"><li>Low-confidence input → Manual Review</li><li>Duplicate input → Suppress second action</li><li>Human approval → Required for consequential action</li><li>Every action → Run Log proof</li><li>Backend failure → Request remains recoverable</li></ul></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card"><button class="close" id="closeModal">×</button><span class="pill">NEW STUDENT REQUEST</span><h2>Submit a leave request</h2><p>Try natural language, Hinglish or intentionally incomplete input.</p>
+      <form id="requestForm">
+        <label>Student name<input id="student" required placeholder="e.g. Raghav Bansal"></label>
+        <label>Email<input id="email" type="email" placeholder="student@example.com"></label>
+        <label>Message<textarea id="message" required rows="4" placeholder="Sir kal ghar mein function hai, college nahi aa paunga."></textarea></label>
+        <button class="primary wide">Run CampusFlow AI →</button>
+      </form>
+    </div>
+  </div>
+  <div id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
